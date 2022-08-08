@@ -1,3 +1,4 @@
+import console_using as console
 
 
 def is_win(board):
@@ -8,5 +9,25 @@ def is_win(board):
     return False
 
 
-
-field = [' ' for x in range(1, 10)]
+def game(field=[' ' for x in range(1, 10)]):
+    counter = 0
+    win = False
+    symbol = 'X'
+    while not win:
+        console.view.draw_field(field)
+        if counter % 2:
+            field[console.input.player_choise(symbol, field) - 1] = symbol
+            symbol = 'X'
+        else:
+            field[console.input.player_choise(symbol, field) - 1] = symbol
+            symbol = '0'
+        counter += 1
+        if counter > 4:
+            temp = is_win(field)
+            if temp:
+                print(f'{temp} is win')
+                win = True
+                break
+        if counter == 9:
+            print('Nobody win')
+            break
